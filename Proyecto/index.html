@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Control de Garaje con Arduino</title>
+    <style>
+        body {
+            background-image: url('C:/Users/boos-/Downloads/Udemy/AppInventoor/Clases/Proyecto/fondo3.jpg');
+            background-size: cover;
+            background-position: center;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+        }
+
+        h1, form {
+            text-align: center;
+            color: rgb(221, 48, 48);
+        }
+
+        .proyecto-dialog {
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px;
+        }
+
+        .file-upload {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        /* Estilos para los botones de navegación y acciones */
+        .navigation {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .nav-button, .action-button {
+            background-color: #d38716;
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            margin-right: 10px;
+        }
+
+        .image-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            margin: 20px;
+        }
+
+        .image-container img {
+            width: 200px;
+            height: auto;
+            margin: 10px;
+            cursor: pointer;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .image-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            justify-content: center;
+            align-items: center;
+            z-index: 2;
+        }
+
+        .image-overlay img {
+            max-width: 90%;
+            max-height: 90%;
+            cursor: pointer;
+        }
+
+        .image-navigation {
+            position: absolute;
+            top: 50%;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .image-navigation button {
+            background-color: #1c1c1c;
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            font-size: 16px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div id="inicioPage">
+        <h1>Control de Garaje con Arduino</h1>
+        <br>
+        <div class="navigation">
+            <button class="nav-button" onclick="mostrarRegistro()">Galeria</button>
+        </div>
+        <br>
+        <center>
+            <h3>Abrir y Cerrar Garage</h3> 
+            <video width="640" height="360" controls>
+                <br> <source src="video.mp4" type="video/mp4" alt="Imagen Centro">
+            </video><br>
+          
+            </div>
+        </center>
+    </div>
+    <br>
+    <div id="registroPage" style="display:none;">
+        
+            <div class="image-container" onclick="abrirVisorImagen(event)">
+                <img src="img1.png.jpg" alt="Imagen Izquierda">
+                <img src="img.png.jpg">
+                <img src="img2.png.jpg" alt="Imagen Derecha">
+                <img src="img3.png.jpg" alt="Imagen Centro">     
+                <img src="img4.jpg">
+                <img src="img5.jpg" alt="Imagen Derecha">
+                <img src="img7.jpg">
+                <img src="img8.jpg">
+                <img src="img9.jpg">                 
+                <img src="img6.jpg" alt="Imagen Centro">
+                <br>
+
+        <div class="navigation">
+            <button class="nav-button" onclick="mostrarInicio()">Inicio</button>
+        </div>
+    </div>
+
+    <div class="image-overlay" id="imageOverlay" onclick="cerrarVisorImagen()">
+        <div class="image-navigation">
+           
+            <button onclick="navegarImagen(1)">Atras</button>
+        </div>
+        <img id="imagenVisor" src="" alt="Imagen en pantalla completa">
+    </div>
+
+    <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-database.js"></script>
+    <script src="app.js"></script>
+
+    <script>
+        function mostrarRegistro() {
+            document.getElementById('inicioPage').style.display = 'none';
+            document.getElementById('registroPage').style.display = 'block';
+        }
+
+        function mostrarInicio() {
+            document.getElementById('registroPage').style.display = 'none';
+            document.getElementById('inicioPage').style.display = 'block';
+        }
+
+        function abrirVisorImagen(event) {
+            const imageSrc = event.target.src;
+            const imageIndex = Array.from(event.currentTarget.children).indexOf(event.target);
+            document.getElementById('imagenVisor').src = imageSrc;
+            document.getElementById('imageOverlay').style.display = 'flex';
+        }
+
+        function cerrarVisorImagen() {
+            document.getElementById('imageOverlay').style.display = 'none';
+        }
+
+        function navegarImagen(direccion) {
+            // Lógica para navegar hacia la imagen anterior o siguiente
+            // Puedes implementar esto según tus necesidades
+        }
+    </script>
+</body>
+</html>
